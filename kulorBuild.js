@@ -11,7 +11,9 @@ module.exports = function( bower , grunt , tool , log , callback ) {
     } else {
         tool.file.copy( _dir + "src/js" , "./src/js" );
         tool.file.copy( _dir + "grunt" , "./grunt" );
-        log( "kulor init success..." );
+        tool.file.copy( _dir + "src/layout" , "src/layout" );
+        tool.file.copy( _dir + "src/less" , "src/less" );
+        tool.file.copy( _dir + "src/index.jade" , "src/index.jade" );
     }
     callback();
 }
