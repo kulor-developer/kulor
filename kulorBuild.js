@@ -1,5 +1,5 @@
-module.exports = function( kulor , grunt , tool , log ) {
-    var _dir    = kulor.cacheDir + "kulor/";
+module.exports = function( bower , grunt , tool , log , callback ) {
+    var _dir    = this.cacheDir + "kulor/";
     if( grunt.file.exists( _dir + "Gruntfile.js" ) ){
         grunt.file.copy( _dir + "Gruntfile.js" , "./Gruntfile.js"  );
     }
@@ -13,4 +13,5 @@ module.exports = function( kulor , grunt , tool , log ) {
         tool.file.copy( _dir + "grunt" , "./grunt" );
         log( "kulor init success..." );
     }
+    callback();
 }
