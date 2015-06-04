@@ -4,8 +4,8 @@ define( "Template" , [ "Base" ] , function( Base ){
      *  默认为kulor-template
      */
     var Template = Base.extend( function(){
-        if( $.isEmptyObject( this.__Template ) ){
-            this.getTemplateSources();    
+        for( var _name in this.__Template ){
+            this.getTemplateSources();
         }
     } , {
         __templateConfig    : {

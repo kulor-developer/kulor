@@ -51,7 +51,7 @@ define( "DataView" , [ "Base" , "Template" , "EventBind" ] , function( Base , Te
 			} else if( typeof key === "object" ){
 				_json = $.extend( _json , key );
 			}
-			if ( !$.isEmptyObject( _json ) ) {
+			for( var _name in _json ){
 				return this.refreshDataView( $.extend( {} , this._dataViewConfig.innerVals , _json ) );
 			}
 			return this;
