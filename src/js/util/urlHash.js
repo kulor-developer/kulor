@@ -5,6 +5,10 @@ define( "UrlHash" , [ "Base" ] , function( Base ){
     var UrlHash = Base.extend( function(){
         this.url    = window.location.href;
     } , {
+        gotoUrl     : function( url , params ){
+            window.location.href    = this.getPageUrl( url , params );
+            return this;
+        } ,
         getPageUrl  : function( url , params ){
             var _urlHash    = [];
             for( var a in params ){
