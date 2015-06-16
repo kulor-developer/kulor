@@ -1,4 +1,5 @@
-var inquirer    = require( "inquirer" );
+var inquirer    = require( "inquirer" ),
+    path        = require( "path" );
 
 function Build( kulor , bower , grunt , tool , log , callback ){
     this.kulor      = kulor;
@@ -52,7 +53,7 @@ Build.fn    = Build.prototype   = {
         } 
     ] ,
     getPackageJson  : function( callback ){
-        var _json   = JSON.parse( this.grunt.file.read( this.kulor.cacheDir + "kulor/" + "package.json" ) );
+        var _json   = JSON.parse( this.grunt.file.read( path.resolve( this.kulor.cacheDir , "kulor/" , "package.json" ) ) );
         inquirer.prompt( this.questions , function( answers ){
             answers.author          = {
                 name        : answers.authorName ,
@@ -77,29 +78,32 @@ Build.fn    = Build.prototype   = {
         } );
     } ,
     init            : function(){
-        var _dir    = this.kulor.cacheDir + "kulor/" ,
+        var _dir    = path.resolve( this.kulor.cacheDir , "kulor" ),
             _self   = this ,
             _done   = function( json ){
                 if( json ){
                     _self.grunt.file.write( "./package.json" , JSON.stringify( json , null , "    " ) , { force : true } );  
                 }
                 _self.callback();
-            };
-        if( this.grunt.file.exists( _dir + "Gruntfile.js" ) ){
-            this.grunt.file.copy( _dir + "Gruntfile.js" , "./Gruntfile.js"  );
+            } ,
+            _path;
+        _path   = path.resolve( _dir + "Gruntfile.js" );
+        if( this.grunt.file.exists( _path ) ){
+            this.grunt.file.copy( _path , "./Gruntfile.js"  );
         }
 
         if( this.grunt.file.isDir( "src" ) ){
             this.log( "folder src exists..." );
         } else {
-            this.tool.file.copy( _dir + "src/js" , "./src/js" );
-            this.tool.file.copy( _dir + "grunt" , "./grunt" );
-            this.tool.file.copy( _dir + "src/layout" , "src/layout" );
-            this.tool.file.copy( _dir + "src/less" , "src/less" );
-            this.tool.file.copy( _dir + "src/index.jade" , "src/index.jade" );
+            this.tool.file.copy( path.resolve( _dir , "src/js" ) , "./src/js" );
+            this.tool.file.copy( path.resolve( _dir , "grunt" ) , "./grunt" );
+            this.tool.file.copy( path.resolve( _dir , "src/layout" ) , "src/layout" );
+            this.tool.file.copy( path.resolve( _dir , "src/less" ) , "src/less" );
+            this.tool.file.copy( path.resolve( _dir , "src/index.jade" ) , "src/index.jade" );
+            this.tool.file.copy( path.resolve( _dir , "kulor.json" ) , "kulor.json" );
         }
 
-        if( this.grunt.file.exists( _dir + "package.json" ) ){
+        if( this.grunt.file.exists( path.resolve( _dir , "package.json" ) ) ){
             this.getPackageJson( _done );  
         } else {
             _done();
