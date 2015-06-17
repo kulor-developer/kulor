@@ -87,13 +87,9 @@ Build.fn    = Build.prototype   = {
                 _self.callback();
             } ,
             _path;
-        _path   = path.resolve( _dir + "Gruntfile.js" );
-        if( this.grunt.file.exists( _path ) ){
-            this.grunt.file.copy( _path , "./Gruntfile.js"  );
-        }
 
         if( this.grunt.file.isDir( "src" ) ){
-            this.log( "folder src exists..." );
+            this.log( "folder src exists , delete folder src and run again." );
         } else {
             this.tool.file.copy( path.resolve( _dir , "src/js" ) , "./src/js" );
             this.tool.file.copy( path.resolve( _dir , "grunt" ) , "./grunt" );
@@ -101,6 +97,7 @@ Build.fn    = Build.prototype   = {
             this.tool.file.copy( path.resolve( _dir , "src/less" ) , "src/less" );
             this.tool.file.copy( path.resolve( _dir , "src/index.jade" ) , "src/index.jade" );
             this.tool.file.copy( path.resolve( _dir , "kulor.json" ) , "kulor.json" );
+            this.tool.file.copy( path.resolve( _dir , "Gruntfile.js" ) , "Gruntfile.js" );
         }
 
         if( this.grunt.file.exists( path.resolve( _dir , "package.json" ) ) ){
