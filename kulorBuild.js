@@ -96,11 +96,13 @@ Build.fn    = Build.prototype   = {
             this.tool.file.copy( path.resolve( _dir , "src/layout" ) , "src/layout" );
             this.tool.file.copy( path.resolve( _dir , "src/less" ) , "src/less" );
             this.tool.file.copy( path.resolve( _dir , "src/index.jade" ) , "src/index.jade" );
-            this.tool.file.copy( path.resolve( _dir , "kulor.json" ) , "kulor.json" );
             this.tool.file.copy( path.resolve( _dir , "Gruntfile.js" ) , "Gruntfile.js" );
+            if( !this.grunt.file.exists( "./kulor.json" ) ){
+                this.tool.file.copy( path.resolve( _dir , "kulor.json" ) , "kulor.json" );
+            }
         }
 
-        if( this.grunt.file.exists( path.resolve( _dir , "package.json" ) ) ){
+        if( !this.grunt.file.exists( path.resolve( _dir , "package.json" ) ) ){
             this.getPackageJson( _done );  
         } else {
             _done();
