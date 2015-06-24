@@ -102,7 +102,7 @@ Build.fn    = Build.prototype   = {
             }
         }
 
-        if( !this.grunt.file.exists( path.resolve( _dir , "package.json" ) ) ){
+        if( !this.grunt.file.exists( path.resolve( "package.json" ) ) ){
             this.getPackageJson( _done );  
         } else {
             _done();
