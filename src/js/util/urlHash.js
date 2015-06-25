@@ -1,6 +1,6 @@
 define( "UrlHash" , [ "Base" ] , function( Base ){
     /*!
-     *  增加一个事件的反向监听
+     *  urlHash提取/保存 管理
      */
     var UrlHash = Base.extend( function(){
         this.url    = window.location.href;
@@ -22,10 +22,12 @@ define( "UrlHash" , [ "Base" ] , function( Base ){
                 _keyVal ,
                 _json   = {};
             return this.urlHash || ( function(){
-                _url    = _self.url.replace( /.*\?/ , "" ).split( "&" );
-                for( var i = _url.length; i--; ){
-                    _keyVal     = _url[ i ].split( "=" );
-                    _json[ _keyVal[ 0 ] ]   = decodeURIComponent( _keyVal[ 1 ] );
+                if( _self.url.indexOf( "?" ) > -1 ){
+                    _url    = _self.url.replace( /.*\?/ , "" ).split( "&" );
+                    for( var i = _url.length; i--; ){
+                        _keyVal     = _url[ i ].split( "=" );
+                        _json[ _keyVal[ 0 ] ]   = decodeURIComponent( _keyVal[ 1 ] );
+                    }
                 }
                 _self.urlHash   = _json;
                 return _json;
