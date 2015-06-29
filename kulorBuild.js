@@ -88,18 +88,15 @@ Build.fn    = Build.prototype   = {
             } ,
             _path;
 
-        if( this.grunt.file.isDir( "src" ) ){
-            this.log( "folder src exists , delete folder src and run again." );
-        } else {
-            this.tool.file.copy( path.resolve( _dir , "src/js" ) , "./src/js" );
-            this.tool.file.copy( path.resolve( _dir , "grunt" ) , "./grunt" );
-            this.tool.file.copy( path.resolve( _dir , "src/layout" ) , "src/layout" );
-            this.tool.file.copy( path.resolve( _dir , "src/less" ) , "src/less" );
-            this.tool.file.copy( path.resolve( _dir , "src/index.jade" ) , "src/index.jade" );
-            this.tool.file.copy( path.resolve( _dir , "Gruntfile.js" ) , "Gruntfile.js" );
-            if( !this.grunt.file.exists( "./kulor.json" ) ){
-                this.tool.file.copy( path.resolve( _dir , "kulor.json" ) , "kulor.json" );
-            }
+        this.tool.file.copy( path.resolve( _dir , "src/js" ) , "./src/" );
+        this.tool.file.copy( path.resolve( _dir , "grunt" ) , "./" );
+        this.tool.file.copy( path.resolve( _dir , "src/layout" ) , "src/" );
+        this.tool.file.copy( path.resolve( _dir , "src/less" ) , "src/" );
+        this.tool.file.copy( path.resolve( _dir , "src/index.jade" ) , "src/index.jade" );
+        this.tool.file.copy( path.resolve( _dir , "Gruntfile.js" ) , "Gruntfile.js" );
+
+        if( !this.grunt.file.exists( "./kulor.json" ) ){
+            this.tool.file.copy( path.resolve( _dir , "kulor.json" ) , "kulor.json" );
         }
 
         if( !this.grunt.file.exists( path.resolve( "package.json" ) ) ){
