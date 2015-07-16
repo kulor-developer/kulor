@@ -14,7 +14,7 @@ define( "UrlHash" , [ "Base" ] , function( Base ){
             for( var a in params ){
                 _urlHash.push( a + "=" + encodeURIComponent( params[ a ] ) );
             }
-            return url + "?" + _urlHash.join( "&" );
+            return _urlHash.length ? ( url + "?" + _urlHash.join( "&" ) ) : url;
         } ,
         getHash     : function(){
             var _self   = this ,
