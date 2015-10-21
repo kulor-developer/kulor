@@ -166,6 +166,8 @@ define( "RequireFile" , [ "Base" ] , function( Base ){
 						_url = filePath[ i ];
 						require.call( _iterator , _url , this );
 					}
+				} else {
+					callBack();
 				}
 			}
 			return this;
