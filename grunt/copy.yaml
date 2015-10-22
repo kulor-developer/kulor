@@ -52,9 +52,9 @@ lib-dist:
 js-dev:
   expand: true
   filter: isFile
-  cwd: <%= src %>/js
+  cwd: <%= src %>
   src: '**/*.js'
-  dest: <%= dev %>/js
+  dest: <%= dev %>
 
 html-dev:
   expand: true

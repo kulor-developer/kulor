@@ -33,6 +33,7 @@ js:
     - <%= src %>/js/**/*.js
     - <%= src %>/plugin/**/*.js
     - <%= src %>/mock/**/*.js
+    - <%= src %>/testJs/**/*.js
   tasks:
     - copy:js-dev
     - copy:lib-dev

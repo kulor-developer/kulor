@@ -2,6 +2,7 @@ node_modules
 dev
 dist
 build
+.temp
 report
 npm-debug.log
 src/plugin

@@ -78,44 +78,43 @@ define( "Validate" , [ "Base" ] , function( Base ){
                     callbackFunc: func
                 }
                 $form.find( ":input " ).each( function(){
-                    var _input  = rules[ this.name ],
+                    var _item  = rules[ this.name ],
                         _rule   = [];
-                    if( _input ){
-                        if ( typeof _input === "string" ) {
-                            _input = {
-                                rules   : _input
-                            };
-                        } else if( _input instanceof Array ){
-                            _input = {
-                                rules   : _input[ 0 ] ,
-                                content : _input[ 1 ] || "",
-                                param   : _input[ 2 ]
-                            };
+                    if( _item ){
+                        if ( typeof _item === "string" ) {
+                            _item = {
+                                rules   : _item
+                            }
+                        } else if( _item instanceof Array ){
+                            _item = {
+                                rules   : _item[ 0 ] ,
+                                content : _item[ 1 ] || "",
+                                param   : _item[ 2 ]
+                            }
                         }
-                        _input.$input = $( this );
-                        _input.rules = _input.rules.replace( /^\s+/, "" )
+                        _item.$input = $( this );
+                        _item.rules = _item.rules.replace( /^\s+/, "" )
                                         .replace( /\s+$/, "" )
                                         .replace( /\s+/gi , " " )
                                         .replace( /\[\s*([^\W]*)\s*\,\s*([^\W]*)\s*\]/gi , "[$1,$2]" )
                                         .split( " " );
-                        for( var i = _input.rules.length; i--; ){
-                            if ( /.+\[.+\]/.test( _input.rules[ i ] ) ) {
-                                _input.rules[ i ] = _input.rules[ i ].split( "[" );
+                        for( var i = _item.rules.length; i--; ){
+                            if ( /.+\[.+\]/.test( _item.rules[ i ] ) ) {
+                                _item.rules[ i ] = _item.rules[ i ].split( "[" );
                                 _rule.push( {
-                                    ruleName    : _input.rules[ i ][ 0 ] ,
-                                    param       : JSON.parse( "[" + _input.rules[ i ][ 1 ] )
+                                    ruleName    : _item.rules[ i ][ 0 ] ,
+                                    param       : JSON.parse( "[" + _item.rules[ i ][ 1 ] )
                                 } );
                             } else {
                                 _rule.push( {
-                                    ruleName    : _input.rules
+                                    ruleName    : _item.rules
                                 } );
                             }
                         }
-                        _input.rules = _rule;
-                        rules[ this.name ] = _input;
-
-                        _input.$input.blur( function(){
-                            func( _input.$input , _self.handleVerifyItem( _input ) , _input.content , _input );
+                        _item.rules = _rule;
+                        rules[ this.name ] = _item;
+                        _item.$input.blur( function(){
+                            func( _item.$input , _self.handleVerifyItem( _item ) , _item.content , _item );
                         } );
                     }
                 } );
@@ -138,6 +137,21 @@ define( "Validate" , [ "Base" ] , function( Base ){
             }
             $.extend( this[ isGlobal ? "__validateConfig" : "_validateConfig" ].rules , _inputs );
             return this;
+        } ,
+        /*!
+         *  执行单个验证规则
+         *  @ruleName   {string}    待验证的规则名称
+         *  @arguments  {str ...}   验证规则值
+         */
+        checkRule   : function( ruleName ){
+            var _opt ,
+                _rules  = $.extend( this.__validateConfig.rules , this._validateConfig.rules );
+            if( _rules[ ruleName ] ){
+                _opt    = Array.prototype.slice.call( arguments );
+                _opt    = _opt.slice( 1 , _opt.length );
+                return _rules[ ruleName ].apply( this , _opt );
+            }
+            return false;
         }
     } );
 
@@ -162,6 +176,9 @@ define( "Validate" , [ "Base" ] , function( Base ){
         } ,
         isNumber  : function( str ){
             return /^\d+$/.test( str );
+        } ,
+        isPhone     : function( num ){
+            return /^1[3|4|5|7|8]\d{9}$/.test( num );
         }
     } , true );
 
