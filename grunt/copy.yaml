@@ -1,3 +1,11 @@
+lib-temp:
+  expand: true
+  filter: isFile
+  cwd: <%= dev %>/js/lib
+  src:
+    - jquery*.js
+  dest: <%= temp %>/js/lib
+
 css-dev:
   expand: true
   filter: isFile
@@ -30,30 +38,13 @@ lib-dev:
   src: '**.*'
   dest: <%= dev %>/js/lib
 
-lib-temp:
-  expand: true
-  filter: isFile
-  cwd: <%= dev %>/js/lib
-  src:
-    - jquery*.js
-  dest: <%= temp %>/js/lib
-
-lib-dist:
-  expand: true
-  filter: isFile
-  cwd: <%= dev %>/js/lib
-  src:
-    - html5.js
-    - jquery*.js
-    - sea*.js
-    - '*.map'
-  dest: <%= dist %>/js/lib
-
 js-dev:
   expand: true
   filter: isFile
   cwd: <%= src %>
-  src: '**/*.js'
+  src: 
+    - 'js/**/*.js'
+    - 'testjs/**/*.js'
   dest: <%= dev %>
 
 html-dev:
@@ -70,6 +61,56 @@ js-dev-sub:
   cwd     : <%= src %>/plugin/
   src     : "**/*.js"
   dest    : <%= dev %>/js/plugin
+
+fav-icon-dev  :
+  expand  : true
+  filter  : isFile
+  cwd     : <%= src %>/
+  src     : "*.ico"
+  dest    : <%= dev %>/
+
+lib-dist:
+  expand: true
+  filter: isFile
+  cwd: <%= dev %>/js/lib
+  src:
+    - html5.js
+    - jquery*.js
+    - sea*.js
+    - '*.map'
+  dest: <%= dist %>/js/lib
+
+fonts-dist  : 
+  expand: true
+  filter: isFile
+  cwd: <%= src %>/fonts
+  src: '*'
+  dest: <%= dist %>/fonts
+
+fav-icon-dist  :
+  expand  : true
+  filter  : isFile
+  cwd     : <%= src %>/
+  src     : "*.ico"
+  dest    : <%= dist %>/
+
+images-dist:
+  expand: true
+  filter: isFile
+  cwd: <%= dev %>
+  src:
+    - '**/*.jpg'
+    - '**/*.jpeg'
+    - '**/*.png'
+    - '**/*.bmp'
+  dest: <%= dist %>
+
+html-dist:
+  expand: true
+  filter: isFile
+  cwd: <%= src %>
+  src: '**/*.html'
+  dest: <%= dist %>
 
 manifest  :
   expand  : true

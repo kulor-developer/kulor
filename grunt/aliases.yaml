@@ -7,6 +7,7 @@ copy-dev:
   - copy:html-dev
   - copy:js-dev-sub
   - copy:manifest
+  - copy:fav-icon-dev 
 
 copy-temp:
   - copy:lib-temp
@@ -16,6 +17,7 @@ copy-dist:
   - copy:images-dist
   - copy:lib-dist
   - copy:html-dist
+  - copy:fav-icon-dist
 
 mock:
   - clean:dev
@@ -26,6 +28,7 @@ mock:
   - concat:global
   - concat:mock
   - listcsslink
+  - sprite
 
 # 构建开发版本
 dev:
@@ -35,6 +38,7 @@ dev:
   - copy-dev
   - concat:global
   - listcsslink
+  - sprite
 
 # 打开发布版服务器
 online:

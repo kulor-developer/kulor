@@ -1,0 +1,7 @@
+sign   :
+    src     : 
+        - "<%= src %>/image/sign/**/*.png"
+        - "<%= src %>/image/sign/**/*.jpg"
+    dest    : "<%= dev %>/image/sign-sprites.png"
+    destCss : "<%= dev %>/css/sign-sprites.css"
+    padding : 20

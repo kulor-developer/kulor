@@ -3,12 +3,14 @@ extends layout/default
 block head
 
 block body
-    form#demo-1
-        h3 验证字段长度
-        input(name="length")
-        h3 验证电话
-        input(name="phone")
-        h3 验证数字
-        input(name="number")
-        #demo-1-btn 提交
+    script(type="text/kulor-template" , id="container")
+        form#demo-1
+            h3 验证字段长度
+            input(name="length")
+            h3 验证电话
+            input(name="phone")
+            h3 验证数字
+            input(name="number")
+            #demo-1-btn 提交
+        
     script(src="testJs/validate.js")
