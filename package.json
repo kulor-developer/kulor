@@ -1,7 +1,7 @@
 {
     "name"          : "kulor",
     "description"   : "kulor web framework",
-    "version" : "0.1.2",
+    "version" : "1.0.0",
     "homepage": "http://nihaox1.github.io/kulor-doc/",
     "author"  : {
         "name"    : "bo.cheng",
